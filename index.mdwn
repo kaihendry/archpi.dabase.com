@@ -1,0 +1,19 @@
+# Simple Wiki
+
+My sister needed a simple Webpage to add Wedding information upon.
+
+1. It needs to be user friendly
+2. Edit page functionality needed
+3. Hosted on our domain
+
+# Typical options
+
+[Github pages](http://pages.github.com/) does not have an easy way to edit the Webpage. It does have a nice CNAME ability.
+
+[Wordpress](http://wordpress.org/) is unsuitable since it's an absolute pain to setup.
+
+# Implementation
+
+1. HTML isn't hard, but we've made it easier with Markdown and a [preview application](https://code.google.com/p/pagedown/)
+2. Edit page is accomplished with appending /edit to the URL
+3. Git clone to your VHOST directory, and away you go. Needs PHP, m4, make & markdown.

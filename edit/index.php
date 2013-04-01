@@ -22,13 +22,11 @@ $content = "../index.mdwn";
 $style = "../style.css";
 if (isset($_POST['content'])) {
 	file_put_contents($content, stripslashes($_POST['content']));
-	echo "<p>Saved content.</p>";
 }
 if (isset($_POST['style'])) {
 	file_put_contents($style, stripslashes($_POST['style']));
-	echo "<p>Saved style.</p>";
 }
-`cd .. && make`;
+echo `cd .. && make`;
 ?>
 </pre>
 
