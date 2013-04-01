@@ -33,6 +33,8 @@ if (isset($_POST['style'])) {
 <?php readfile($content); ?>
 </textarea>
 
+<p>Write in HTML or <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a>.</p>
+
 
 <h1>Style</h1>
 <textarea name=style>
