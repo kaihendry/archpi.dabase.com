@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-m4_include(style.css)
-</style>
+<link rel="stylesheet" href="/style.css"/>
 <title>
