@@ -1,4 +1,4 @@
-# Word sister
+# [Word sister](https://github.com/kaihendry/wordsister)
 
 My sister needed a simple Webpage to add Wedding information upon. The options
 sucked, so I wrote this.
@@ -9,11 +9,16 @@ sucked, so I wrote this.
 
 ## Implementation
 
-1. HTML isn't hard, but we've made it easier with Markdown and a [preview application](https://code.google.com/p/pagedown/)
-2. Edit page is accomplished with appending [/edit][1] to the URL
-3. Git clone to your VirtualDocumentRoot directory, and away you go. Needs PHP, `make` & a `markdown` binary.
+1. HTML isn't hard, but we've made it easier with Markdown with a [preview](https://code.google.com/p/pagedown/)
+2. Editing a page is accomplished by appending [/edit][1] to the URL
+3. Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. Needs PHP, `make` & a `markdown` binary.
 
-<code>cd /srv/www; git clone git:///for-my-sister wedding.example.com</code>
+<pre>cd /srv/www; git clone git@github.com:kaihendry/wordsister.git ws.dabase.com
+cd ws.dabase.com; sudo chown -R :www-data .;  sudo chmod g+s .</pre>
+
+## Demo
+
+Resets on the hour: <http://ws.dabase.com/>
 
 
   [1]: /edit/
