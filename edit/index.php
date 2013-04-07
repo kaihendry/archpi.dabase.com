@@ -2,10 +2,13 @@
 $content = "../index.mdwn";
 $style = "../style.css";
 
+umask(002);
+
 if (isset($_REQUEST['q'])) {
-	$content = "../" . $_REQUEST['q'];
+	$q = filter_var($_REQUEST['q'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+	$content = "../" . $q;
 	@mkdir($content, 0777, true);
-	$content = "../" . $_REQUEST['q'] . "/index.mdwn";
+	$content = "../" . $q . "/index.mdwn";
 }
 if (isset($_POST['style'])) {
 	file_put_contents($style, stripslashes($_POST['style']));
