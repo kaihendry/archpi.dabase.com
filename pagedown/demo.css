@@ -101,9 +101,6 @@ width: 660px;
     left: 300px;
 }
 
-
-
-
 .wmd-prompt-background
 {
 	background-color: Black;
@@ -133,5 +130,5 @@ width: 660px;
 	font-weight: bold;
 }
 
-#upload { position: absolute; margin-top: 500px; background-color: #FFFFCC; padding: 2em; }
-#styleeditor { position: absolute; margin-top: 500px; background-color: #FFFFCC; width: 600px; margin-left: 650px; }
+#upload { position: absolute; margin-top: 500px; background-color: #FFFFCC; padding: 2em; margin-left: 3em; }
+#styleeditor { position: absolute; margin-top: 700px; background-color: #FFFFCC; width: 600px; border: dashed thick black; margin-left: 0; }
