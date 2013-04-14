@@ -1,8 +1,10 @@
-# [Word sister](https://github.com/kaihendry/wordsister)
+# [Word fosadsfs](https://github.com/kaihendry/wordsister)
 
 <img src="http://graph.facebook.com/anotherjutta/picture?type=large">
 
-My sister needed a simple Web page to add Wedding information upon. The options
+OH
+
+My blister needed a simple Web page to add Wedding information upon. The options
 sucked, so I wrote this.
 
 1. It needs to be user friendly

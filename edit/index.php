@@ -1,6 +1,7 @@
 <?php
 $content = "../index.mdwn";
 $style = "../style.css";
+include("auth.php");
 
 umask(002);
 
@@ -10,22 +11,21 @@ if (isset($_REQUEST['q'])) {
 	@mkdir($content, 0777, true);
 	$content = "../" . $q . "/index.mdwn";
 }
-if (isset($_POST['style'])) {
+if (getAdmin() && isset($_POST['style'])) {
 	file_put_contents($style, stripslashes($_POST['style']));
 }
-if (isset($_POST['content'])) {
+if (getAdmin() && isset($_POST['content'])) {
 	file_put_contents($content, stripslashes($_POST['content']));
 	`cd .. && make`;
 	header("Location: http://" . $_SERVER["HTTP_HOST"] . '/' . dirname($content));
 }
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <style>
-body {
-	font-family: "Helvetica Neue", sans-serif;
-}
+body { font-family: "Helvetica Neue", sans-serif; }
 textarea { width: 100%; height: 20em; }
 </style>
 <link rel="stylesheet" href="/pagedown/demo.css">
@@ -38,7 +38,17 @@ textarea { width: 100%; height: 20em; }
 <body>
 
 <form method=post>
-<input type=submit value=Save>
+
+<?php
+// Auth bit
+if (is_dir_empty($cc)) {
+	setAdmin(trim(`head -c 4 /dev/urandom | xxd -p`));
+	echo '<p><input type=submit value=Save>Set cookie!</p>';
+} elseif (getAdmin()) {
+	echo '<p><input type=submit value=Save>Found cookie!</p>';
+} else { echo '<p>You dont have write permissions</p>'; }
+?>
+
 <div class="wmd-panel">
 <div id="wmd-button-bar"></div>
 <textarea class="wmd-input" id="wmd-input" name="content">

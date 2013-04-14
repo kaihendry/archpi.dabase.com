@@ -1,12 +1,16 @@
 <?php
+include("edit/auth.php");
 
 // date_default_timezone_set('Europe/London');
 umask(002);
 
+if (! getAdmin()) {
+	die("Not an admin!");
+}
+
 if (! is_uploaded_file($_FILES['f']['tmp_name'])) {
 	die("Upload fail: Missing file.");
 }
-
 
 $dir = getcwd();
 if (is_writable($dir)) {
