@@ -46,7 +46,7 @@ if (is_dir_empty($cc)) {
 	echo '<p><input type=submit value=Save>Set cookie!</p>';
 } elseif (getAdmin()) {
 	echo '<p><input type=submit value=Save>Found cookie!</p>';
-} else { echo '<p>You dont have write permissions</p>'; }
+} else { die('<p>You dont have write permissions</p>'); }
 ?>
 
 <div class="wmd-panel">
