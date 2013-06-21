@@ -6,17 +6,22 @@ My sister needed a simple Web page to add Wedding information upon. The options
 sucked, so I wrote this.
 
 1. It needs to be user friendly
-2. Inline [edit page][1] functionality needed
+2. Inline <a href="/edit">/edit</a> functionality needed
 3. Hosted on our domain
 
 ## Implementation
 
-1. [HTML](http://whatwg.org/html) isn't hard, but we've made it easier with Markdown with a [preview](http://markdown.pioul.fr/)
-2. Editing a page is accomplished by appending <a href="/edit">/edit</a> to the URL
-3. Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. Needs PHP, `make` & a `markdown` binary.
+[HTML](http://whatwg.org/html) isn't hard, though it's easier with Markdown with a [preview](http://markdown.pioul.fr/).
 
-<pre>cd /srv/www; git clone git@github.com:kaihendry/wordsister.git ws.dabase.com
-cd ws.dabase.com; sudo chown -R :www-data .; sudo chmod g+s .</pre>
+Editing a page is accomplished by appending <a href="/edit">/edit</a> to the URL
+
+Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. Needs PHP, `make` & a `markdown` binary.
+
+	cd /srv/www
+	git clone git@github.com:kaihendry/wordsister.git ws.dabase.com
+	cd ws.dabase.com
+	sudo chown -R :www-data .
+	sudo chmod g+s .
 
 ## Demo
 
