@@ -6,7 +6,7 @@ include("auth.php");
 umask(002);
 
 if (isset($_REQUEST['q'])) {
-	$q = filter_var($_REQUEST['q'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+	$q = preg_replace('@[^-a-z0-9]+@', '', trim(strtolower($_REQUEST['q'])));
 	$content = "../" . $q;
 	@mkdir($content, 0777, true);
 	$content = "../" . $q . "/index.mdwn";
