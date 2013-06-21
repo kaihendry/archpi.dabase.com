@@ -24,7 +24,7 @@ an ability to upload files.
 
 ## Install
 
-Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. Needs PHP, `make` & a `markdown` binary.
+Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. Requires [Apache](https://github.com/kaihendry/wordsister/blob/master/.htaccess), PHP, `make` & a `markdown` binary.
 
 	cd /srv/www
 	git clone git@github.com:kaihendry/wordsister.git ws.dabase.com
