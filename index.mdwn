@@ -1,3 +1,5 @@
+<!-- Word sister -->
+
 # [Word sister](https://github.com/kaihendry/wordsister)
 
 <img alt="Jutta Hendry" src="http://graph.facebook.com/anotherjutta/picture?type=large">
