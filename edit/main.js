@@ -16,12 +16,10 @@ $(document).on("ready", function(){
 		
 		// functions
 		init: function(){
-			this.onloadEffect(0);
 			this.bind();
 			this.switchToTarget('preview');
 			this.fitHeight();
 			this.convert();
-			this.onloadEffect(1);
 		},
 		bind: function(){
 			$(window).on("resize", function(){
@@ -96,18 +94,6 @@ $(document).on("ready", function(){
 			this.topPanelsTriggers.removeClass("active");
 			this.fitHeight();
 		},
-		onloadEffect: function(step){
-			var theBody = $(document.body);
-			switch(step){
-				case 0:
-					theBody.fadeTo(0, 0);
-					break;
-				case 1:
-					theBody.fadeTo(1000, 1);
-					break;
-			}
-		}
-		
 	};
 	
 	editor.init();

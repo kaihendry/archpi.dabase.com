@@ -45,7 +45,7 @@ if (is_dir_empty($cc)) {
 	echo '<p><input type=submit value=Save>Set cookie!</p>';
 } elseif (getAdmin()) {
 	echo '<p><input type=submit value=Save>Found cookie!</p>';
-} else { die('<p>You dont have write permissions</p>'); }
+} else { die('<h1>You do not have write permissions. Someone got the cookie before you?</h1>'); }
 ?>
 <div id="left_column">
 <div id="top_panels_container">
