@@ -21,4 +21,4 @@ Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), a
 
 Resets on the hour: <http://ws.dabase.com/> with the cronjob:
 
-    @hourly cd /srv/www/ws.dabase.com; umask 002; git checkout .; make; git clean -d -f
+	@hourly cd /srv/www/ws.dabase.com; umask 002; git checkout .; git clean -d -f; git pull > /dev/null ;make > /dev/null
