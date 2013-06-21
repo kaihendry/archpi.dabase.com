@@ -5,9 +5,20 @@
 My sister needed a simple Web page to add Wedding information upon. The options
 sucked, so I wrote this.
 
-[HTML](http://whatwg.org/html) isn't hard, though it's easier with Markdown with a [preview](http://markdown.pioul.fr/).
+## Features
 
-Editing a page is accomplished by appending <a href="/edit">/edit</a> to the URL
+[HTML](http://whatwg.org/html) isn't hard, though it's easier with Markdown
+with a [preview](http://markdown.pioul.fr/).
+
+Editing a page on the Web is accomplished by appending <a href="/edit">/edit</a> to the URL.
+
+You can also edit directly on the filesystem. Just run `make` in the top level
+directory when done.
+
+There is a simple text area to edit the <a href="style.css">style.css</a> and
+an ability to upload files.
+
+## Install
 
 Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. Needs PHP, `make` & a `markdown` binary.
 
