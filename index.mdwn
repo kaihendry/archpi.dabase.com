@@ -9,6 +9,10 @@ sucked, so I wrote this.
 2. Inline [edit page][1] functionality needed
 3. Hosted on our domain
 
+Oh <span id=foo>foo</span>
+
+Oh this works well.
+
 ## Implementation
 
 1. [HTML](http://whatwg.org/html) isn't hard, but we've made it easier with Markdown with a [preview](https://code.google.com/p/pagedown/)
