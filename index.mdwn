@@ -14,6 +14,8 @@ with a [preview](http://markdown.pioul.fr/).
 
 Editing a page on the Web is accomplished by appending <a href="/edit">/edit</a> to the URL.
 
+First HTML comment becomes the page title.
+
 You can also edit the `*.mdwn` directly on the filesystem. Just run `make` in the top level
 directory when done.
 
