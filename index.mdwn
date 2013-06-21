@@ -1,6 +1,6 @@
 # [Word sister](https://github.com/kaihendry/wordsister)
 
-<img src="http://graph.facebook.com/anotherjutta/picture?type=large">
+<img alt="Jutta Hendry" src="http://graph.facebook.com/anotherjutta/picture?type=large">
 
 My sister needed a simple Web page to add Wedding information upon. The options
 sucked, so I wrote this.
@@ -12,7 +12,7 @@ with a [preview](http://markdown.pioul.fr/).
 
 Editing a page on the Web is accomplished by appending <a href="/edit">/edit</a> to the URL.
 
-You can also edit directly on the filesystem. Just run `make` in the top level
+You can also edit the `*.mdwn` directly on the filesystem. Just run `make` in the top level
 directory when done.
 
 There is a simple text area to edit the <a href="style.css">style.css</a> and
