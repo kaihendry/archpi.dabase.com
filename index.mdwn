@@ -1,6 +1,6 @@
 <!-- Word sister -->
 
-# [Word sister](https://github.com/kaihendry/wordsister)
+# [WORD SISTER](https://github.com/kaihendry/wordsister)
 
 <img alt="Jutta Hendry" src="http://graph.facebook.com/anotherjutta/picture?type=large">
 
@@ -9,15 +9,14 @@ sucked, so I wrote this.
 
 ## Features
 
-[HTML](http://whatwg.org/html) isn't hard, though it's easier with Markdown
+[HTML](http://whatwg.org/html) isn't hard, though it's easier to edit with Markdown
 with a [preview](http://markdown.pioul.fr/).
 
 Editing a page on the Web is accomplished by appending <a href="/edit">/edit</a> to the URL.
 
 First HTML comment becomes the page title.
 
-You can also edit the `*.mdwn` directly on the filesystem. Just run `make` in the top level
-directory when done.
+You can also edit the `*.mdwn` directly on the filesystem. Just run `make` in the top level directory when done.
 
 There is a simple text area to edit the <a href="style.css">style.css</a> and
 an ability to upload files.
@@ -26,11 +25,14 @@ an ability to upload files.
 
 Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. Requires [Apache](https://github.com/kaihendry/wordsister/blob/master/.htaccess), PHP, `make` & a `markdown` binary.
 
-	cd /srv/www
-	git clone git@github.com:kaihendry/wordsister.git ws.dabase.com
-	cd ws.dabase.com
-	sudo chown -R :www-data .
-	sudo chmod g+s .
+    cd /srv/www
+    vhost=ws.dabase.com
+    git clone git@github.com:kaihendry/wordsister.git $vhost
+    cd $vhost
+    chown -R :www-data .
+    chmod g+s .
+    # to keep your changes optionally in source control
+    git checkout -b $vhost
 
 ## Demo
 
