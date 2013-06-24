@@ -9,6 +9,8 @@ sucked, so I wrote this.
 
 ## Features
 
+Very low <abbr title="Source lines of code">SLOC</abbr>. [Suck less](http://suckless.org/) inspired.
+
 [HTML](http://whatwg.org/html) isn't hard, though it's easier to edit with Markdown
 with a [preview](http://markdown.pioul.fr/).
 
