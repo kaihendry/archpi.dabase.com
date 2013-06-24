@@ -30,7 +30,7 @@ Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), a
     git clone git@github.com:kaihendry/wordsister.git $vhost
     cd $vhost
     chown -R :www-data .
-    chmod g+s .
+    chmod g+ws .
     # to keep your changes optionally in source control
     git checkout -b $vhost
 
