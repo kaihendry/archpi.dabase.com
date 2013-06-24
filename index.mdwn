@@ -38,7 +38,8 @@ Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), a
     # to help manage the line endings that PHP produces
     git config core.autocrlf input
 
-First to visit site sets a cookie for authorising edits on the wiki. To share edit rights, share the cookie like so
+First to visit site sets a random **secret cookie id** for authorising edits on
+the wiki. To give or restore edit rights, share the cookie like so:
 
 	echo http://$vhost/edit/?wordsister=$(ls cookies/)
 
