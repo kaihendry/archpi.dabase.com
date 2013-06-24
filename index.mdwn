@@ -35,10 +35,16 @@ Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), a
     chmod g+ws .
     # to keep your changes optionally in source control
     git checkout -b $vhost
+    # to help manage the line endings that PHP produces
+    git config core.autocrlf input
 
 First to visit site sets a cookie for authorising edits on the wiki. To share edit rights, share the cookie like so
 
 	echo http://$vhost/edit/?wordsister=$(ls cookies/)
+
+## How to upgrade Word sister
+
+	git pull origin master
 
 ## Demo
 
