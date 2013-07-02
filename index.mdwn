@@ -59,8 +59,7 @@ Set up a `.git/hook/post-receive` hook on the $vhost like so:
 
 Also run `git config receive.denyCurrentBranch ignore`.
 
-On your local machine, you should be able to `git clone
-ssh://$vhost:/srv/www/$vhost`, make edits and `git push` back to the remote.
+On your local machine, you should be able to `git clone $vhost:/srv/www/$vhost`, make edits and `git push` back to the remote.
 
 ## How to upgrade Word sister to latest upstream
 
