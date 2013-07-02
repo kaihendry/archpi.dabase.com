@@ -20,7 +20,7 @@ You can also edit the `*.mdwn` directly on the filesystem. Just run `make` in th
 
 First HTML comment becomes the page title.
 
-There is a simple text area to edit the <a href="style.css">style.css</a> and
+There is a simple text area to edit the <a href="/style.css">style.css</a> and
 an ability to upload files.
 
 ## Install
@@ -41,12 +41,12 @@ the wiki. To give or restore edit rights, share the cookie like so:
 
 	echo http://$vhost/edit/?wordsister=$(ls cookies/)
 
-## Edit the site remotely via git
+## Optional: Edit the site remotely via git
 
-Set up a `.git/hook/post-receive` hook like so:
+Set up a `.git/hook/post-receive` hook on the $vhost like so:
 
 	#!/bin/sh
-	export GIT_WORK_TREE=/srv/www/wordsister
+	export GIT_WORK_TREE=/srv/www/$vhost
 	if ! git diff --quiet
 	then
 		echo WORDSISTER: Local changes detected. Will NOT be running make!
@@ -56,6 +56,11 @@ Set up a `.git/hook/post-receive` hook like so:
 	git checkout -f master
 	cd $GIT_WORK_TREE
 	make
+
+Also run `git config receive.denyCurrentBranch ignore`.
+
+On your local machine, you should be able to `git clone
+ssh://$vhost:/srv/www/$vhost`, make edits and `git push` back to the remote.
 
 ## How to upgrade Word sister to latest upstream
 
