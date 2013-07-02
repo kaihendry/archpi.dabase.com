@@ -41,9 +41,25 @@ the wiki. To give or restore edit rights, share the cookie like so:
 
 	echo http://$vhost/edit/?wordsister=$(ls cookies/)
 
-## How to upgrade Word sister
+## Edit the site remotely via git
 
-	git pull origin master
+Set up a `.git/hook/post-receive` hook like so:
+
+	#!/bin/sh
+	export GIT_WORK_TREE=/srv/www/wordsister
+	if ! git diff --quiet
+	then
+		echo WORDSISTER: Local changes detected. Will NOT be running make!
+		echo WORDSISTER: Commit them on the remote host and git pull to do a merge.
+		exit 1
+	fi
+	git checkout -f master
+	cd $GIT_WORK_TREE
+	make
+
+## How to upgrade Word sister to latest upstream
+
+	git pull https://github.com/kaihendry/wordsister
 
 ## Demo
 
