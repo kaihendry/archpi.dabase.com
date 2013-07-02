@@ -33,8 +33,6 @@ Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), a
     cd $vhost
     chown -R :www-data .
     chmod g+ws .
-    # to keep your changes optionally in source control
-    git checkout -b $vhost
     # to help manage the line endings that PHP produces
     git config core.autocrlf input
 
