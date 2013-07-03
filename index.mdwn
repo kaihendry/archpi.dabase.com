@@ -7,6 +7,7 @@
 My sister needed a simple Web page to add Wedding information upon. The options
 sucked, so I wrote this.
 
+
 ## Features
 
 Very low <abbr title="Source lines of code">SLOC</abbr>. [Suck less](http://suckless.org/) inspired.
@@ -24,6 +25,11 @@ There is a simple text area to edit the <a href="/style.css">style.css</a> and
 an ability to upload files.
 
 ## Install
+
+<video controls width=640 height=360>
+<source src=http://r2d2.webconverger.org/2013-07-03/wordsisterintro.webm type=video/webm>
+<source src=http://r2d2.webconverger.org/2013-07-03/wordsisterintro.mp4 type=video/mp4>
+</video>
 
 Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. **Requires** [Apache](https://github.com/kaihendry/wordsister/blob/master/.htaccess), PHP, `make` & a `markdown` binary.
 
