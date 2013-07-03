@@ -28,7 +28,7 @@ an ability to upload files.
 Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. Requires [Apache](https://github.com/kaihendry/wordsister/blob/master/.htaccess), PHP, `make` & a `markdown` binary.
 
     cd /srv/www
-    vhost=ws.dabase.com
+    export vhost=ws.dabase.com
     git clone git@github.com:kaihendry/wordsister.git $vhost
     cd $vhost
     chown -R :www-data .
@@ -36,15 +36,18 @@ Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), a
     # to help manage the line endings that PHP produces
     git config core.autocrlf input
 
-First to visit site sets a random **secret cookie id** for authorising edits on
-the wiki. To give or restore edit rights, share the cookie like so:
+
+# Authenication for editing
+
+First to <a href="/edit">/edit</a> gets a random **secret cookie id** for
+authorising edits on the wiki. To give or restore edit rights, share the cookie
+like so:
 
 	echo http://$vhost/edit/?wordsister=$(ls cookies/)
 
 ## Optional: Edit the site remotely via git
 
-Set up a `.git/hook/post-receive` hook on the $vhost like so:
-
+	cat <<HERE > .git/hooks/post-receive
 	#!/bin/sh
 	export GIT_WORK_TREE=/srv/www/$vhost
 	if ! git diff --quiet
@@ -54,10 +57,11 @@ Set up a `.git/hook/post-receive` hook on the $vhost like so:
 		exit 1
 	fi
 	git checkout -f master
-	cd $GIT_WORK_TREE
+	cd \$GIT_WORK_TREE
 	make
-
-Also run `git config receive.denyCurrentBranch ignore`.
+	HERE
+	chmod +x .git/hooks/post-receive
+	git config receive.denyCurrentBranch ignore
 
 On your local machine, you should be able to `git clone $vhost:/srv/www/$vhost`, make edits and `git push` back to the remote.
 
