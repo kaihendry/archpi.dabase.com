@@ -25,7 +25,7 @@ an ability to upload files.
 
 ## Install
 
-Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. Requires [Apache](https://github.com/kaihendry/wordsister/blob/master/.htaccess), PHP, `make` & a `markdown` binary.
+Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. **Requires** [Apache](https://github.com/kaihendry/wordsister/blob/master/.htaccess), PHP, `make` & a `markdown` binary.
 
     cd /srv/www
     export vhost=ws.dabase.com
@@ -37,7 +37,7 @@ Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), a
     git config core.autocrlf input
 
 
-# Authenication for editing
+# Authorising editing
 
 First to <a href="/edit">/edit</a> gets a random **secret cookie id** for
 authorising edits on the wiki. To give or restore edit rights, share the cookie
@@ -49,15 +49,15 @@ like so:
 
 	cat <<HERE > .git/hooks/post-receive
 	#!/bin/sh
-	export GIT_WORK_TREE=/srv/www/$vhost
+	export GIT_WORK_TREE=\$(dirname \$(pwd))
 	if ! git diff --quiet
 	then
-		echo WORDSISTER: Local changes detected. Will NOT be running make!
+		echo WORDSISTER on \$GIT_WORK_TREE: Local changes detected. Will NOT be running make!
 		echo WORDSISTER: Commit them on the remote host and git pull to do a merge.
 		exit 1
 	fi
 	git checkout -f master
-	cd \$GIT_WORK_TREE
+	cd ..
 	make
 	HERE
 	chmod +x .git/hooks/post-receive
