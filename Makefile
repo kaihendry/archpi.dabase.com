@@ -1,4 +1,4 @@
-INFILES = $(shell find . -name "*.mdwn")
+INFILES = $(shell find . -name "index.mdwn")
 OUTFILES = $(INFILES:.mdwn=.html)
 
 all: $(OUTFILES)
