@@ -1,82 +1,45 @@
-<!-- Word sister -->
+<!-- Archlinux on Raspberry PI -->
 
-# [WORD SISTER](https://github.com/kaihendry/wordsister)
+<div id="tocwrapper"><!-- toc --></div>
 
-<img alt="Jutta Hendry" src="http://graph.facebook.com/anotherjutta/picture?type=large">
+<https://wiki.archlinux.org/index.php/Raspberry_Pi>
 
-My sister needed a simple Web page to add Wedding information upon. The options
-sucked, so I wrote this.
+## Why Archlinux ARM ?
 
+* Cleaner
+* Systemd init by default
+* Easier to package and maintain
 
-## Features
+## Installing Archlinux ARM
 
-Very low <abbr title="Source lines of code">SLOC</abbr>. [Suck less](http://suckless.org/) inspired.
+After installing the latest [Archlinux ARM](http://archlinuxarm.org/) from [PI downloads](http://www.raspberrypi.org/downloads) you will find you only have a 2GB root. Expand it following this [guide](http://archlinuxarm.org/forum/viewtopic.php?f=31&t=3119).
 
-[HTML](http://whatwg.org/html) isn't hard, though it's easier to edit with Markdown
-with a [preview](http://markdown.pioul.fr/).
+## To login
 
-Editing a page on the Web is accomplished by appending <a href="/edit">/edit</a> to the URL.
+User name `root` and password `root`.
 
-You can also edit the `*.mdwn` directly on the filesystem. Just run `make` in the top level directory when done.
+## To update
 
-First HTML comment becomes the page title.
+    pacman -Syu
 
-There is a simple text area to edit the <a href="/style.css">style.css</a> and
-an ability to upload files.
+## To search for a package
 
-## Install
+    pacman -Ss $packagename
 
-<video controls width=640 height=360>
-<source src=http://r2d2.webconverger.org/2013-07-03/wordsisterintro.webm type=video/webm>
-<source src=http://r2d2.webconverger.org/2013-07-03/wordsisterintro.mp4 type=video/mp4>
-</video>
+Refer to [pacman reference](https://wiki.archlinux.org/index.php/Pacman) for more examples.
 
-Git clone to your [VirtualDocumentRoot directory](http://dabase.com/e/04025/), and away you go. **Requires** [Apache](https://github.com/kaihendry/wordsister/blob/master/.htaccess), PHP, `make` & a `markdown` binary.
+## How to ask for help
 
-    cd /srv/www
-    export vhost=ws.dabase.com
-    git clone git@github.com:kaihendry/wordsister.git $vhost
-    cd $vhost
-    chown -R :www-data .
-    chmod g+ws .
-    # to help manage the line endings that PHP produces
-    git config core.autocrlf input
+Setup your terminal to upload your console to share the output.
 
+`curl http://archpi.dabase.com/tmux.conf > ~/.tmux.conf`
 
-# Authorising editing
+Run `tmux`. If it's not installed, installed it `pacman -S tmux`.
 
-First to <a href="/edit">/edit</a> gets a random **secret cookie id** for
-authorising edits on the wiki. To give or restore edit rights, share the cookie
-like so:
+Now using tmux's default prefix of `ctrl+b` and the letter `p`, will upload your console to be shared.
 
-	echo http://$vhost/edit/?wordsister=$(ls cookies/)
+To learn more about what tmux can do, have a look at it's default key binds with `tmux lsk`.
 
-## Optional: Edit the site remotely via git
+## How to work out what your PI is doing
 
-	cat <<HERE > .git/hooks/post-receive
-	#!/bin/sh
-	export GIT_WORK_TREE=\$(dirname \$(pwd))
-	if ! git diff --quiet
-	then
-		echo WORDSISTER on \$GIT_WORK_TREE: Local changes detected. Will NOT be running make!
-		echo WORDSISTER: Commit them on the remote host and git pull to do a merge.
-		exit 1
-	fi
-	git checkout -f master
-	cd ..
-	make
-	HERE
-	chmod +x .git/hooks/post-receive
-	git config receive.denyCurrentBranch ignore
-
-On your local machine, you should be able to `git clone $vhost:/srv/www/$vhost`, make edits and `git push` back to the remote.
-
-## How to upgrade Word sister to latest upstream
-
-	git pull https://github.com/kaihendry/wordsister
-
-## Demo
-
-Resets on the hour: <http://ws.dabase.com/> with the cronjob:
-
-	@hourly cd /srv/www/ws.dabase.com; umask 002; git checkout .; git clean -d -f; git pull > /dev/null ;make > /dev/null
+Run `top`.

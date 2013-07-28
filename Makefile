@@ -1,5 +1,6 @@
 INFILES = $(shell find . -name "index.mdwn")
 OUTFILES = $(INFILES:.mdwn=.html)
+TEMP:= $(shell mktemp -u /tmp/config.XXXXXX)
 
 all: $(OUTFILES)
 
@@ -10,7 +11,10 @@ all: $(OUTFILES)
 	@echo "</title></head><body>" >> $@
 	@markdown $< >> $@
 	@cat footer.inc >> $@
+	@mv $@ $(TEMP)
+	@anolis $(TEMP) $@
 	@echo $< '→' $@
+	@rm -f $(TEMP)
 
 clean:
 	rm -f $(OUTFILES)

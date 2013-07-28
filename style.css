@@ -1,9 +1,7 @@
-body  {
-	font-family: "Helvetica Neue", sans-serif;
-	margin: 2.5em;
-	font-size: 1em;
+body {
+	font-family: "Inconsolata", "Helvetica Neue", sans-serif;
 }
 
-h1, h2 { font-family: Georgia, serif; }
+code { background-color: black; color: white; }
 
-h2 { margin-top: 2em; }
+.toc { list-style: none; }
