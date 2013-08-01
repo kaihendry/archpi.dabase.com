@@ -1,14 +1,28 @@
 <!-- Archlinux on Raspberry PI -->
 
+# Archlinux ARM on Raspberry PI (rpi)
+
 <div id="tocwrapper"><!-- toc --></div>
 
-<https://wiki.archlinux.org/index.php/Raspberry_Pi>
+## What's this site?
+
+Have you had an Archlinux ARM question, typed it into Google and didn't find an answer?
+
+Perhaps you found the answer later. Either way, do let me know at hendry AT
+iki.fi and I'll add it to the [site
+source](https://github.com/kaihendry/archpi.dabase.com).
 
 ## Why Archlinux ARM ?
 
 * Cleaner
 * Systemd init by default
 * Easier to package and maintain
+
+## Is there an official wiki?
+
+Not specifically for Arm on Archlinux, though
+<https://wiki.archlinux.org/index.php/Raspberry_Pi> is a good start since much
+of the excellent Archlinux wiki applies to the <abbr title="Raspberry PI">rpi</abbr>.
 
 ## Installing Archlinux ARM
 
@@ -43,3 +57,34 @@ To learn more about what tmux can do, have a look at it's default key binds with
 ## How to work out what your PI is doing
 
 Run `top`.
+
+## How to connect to your PI behind a Firewall?
+
+See <http://pi.dabase.com/> for such a service.
+
+## Is there an Archlinux ARM IRC channel ?
+
+Yes, `irc://irc.freenode.net/#archlinux-arm`
+
+## [PI Camera](http://www.raspberrypi.org/camera): Where is raspi{still,vid}?
+
+[Rpi userland](https://github.com/raspberrypi/userland) is packaged as raspberrypi-firmware-tools.
+
+	# pacman -Ql raspberrypi-firmware-tools | grep bin/raspi
+	raspberrypi-firmware-tools /opt/vc/bin/raspistill
+	raspberrypi-firmware-tools /opt/vc/bin/raspivid
+	raspberrypi-firmware-tools /opt/vc/bin/raspiyuv
+
+If you get:
+
+	# /opt/vc/bin/raspistill -o image.jpg
+	mmal: mmal_vc_component_create: failed to create component 'vc.ril.camera' (1:ENOMEM)
+	mmal: mmal_component_create_core: could not create component 'vc.ril.camera' (1)
+	mmal: Failed to create camera component
+	mmal: main: Failed to create camera component
+	mmal: Camera is not enabled in this build. Try running "sudo raspi-config" and ensure that "camera" has been enabled
+
+You need to append to `/boot/config.txt`:
+
+	start_file=start_x.elf
+	fixup_file=fixup_x.dat
