@@ -4,7 +4,7 @@
 
 <div id="tocwrapper"><!-- toc --></div>
 
-## What's this site?
+## What's this site???
 
 Have you had an Archlinux ARM question, typed it into Google and didn't find an answer?
 
@@ -52,7 +52,7 @@ Run `tmux`. If it's not installed, installed it `pacman -S tmux`.
 
 Now using tmux's default prefix of `ctrl+b` and the letter `p`, will upload your console to be shared.
 
-To learn more about what tmux can do, have a look at it's default key binds with `tmux lsk`.
+To learn more about what tmux can do, have a look at its default key binds with `tmux lsk`.
 
 ## How to work out what your PI is doing
 
@@ -88,3 +88,31 @@ You need to append to `/boot/config.txt`:
 
 	start_file=start_x.elf
 	fixup_file=fixup_x.dat
+
+And `reboot`...
+
+## Sending and receiving PI Camera video over the network
+
+<a href="http://www.flickr.com/photos/hendry/9417983903/" title="2013-08-01 16.55.38 by Kai Hendry, on Flickr"><img src="http://farm8.staticflickr.com/7441/9417983903_0bd80c040c.jpg" width="500" height="375" alt="2013-08-01 16.55.38"></a>
+
+Sending from the PI:
+
+	/opt/vc/bin/raspivid -rot 180 -t 0 -fps 30 -b 2000000 -o - | gst-launch-1.0 -v fdsrc ! h264parse ! rtph264pay config-interval=1 pt=96 !  gdppay ! tcpserversink host=$pi_ip_address port=5000
+
+On the machine you want to view the camera from:
+
+	gst-launch-1.0 -v tcpclientsrc host=$pi_ip_address port=5000 ! gdpdepay ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=false
+
+## Using webp to save bandwidth
+
+Install `cwebp` like so:
+
+	pacman -S libwebp
+
+	# cat capture.sh
+	tmp=$(mktemp /tmp/XXX.jpg)
+	webp=$(basename $tmp .jpg).webp
+	raspistill -vf -o $tmp
+	cwebp $tmp -o /dev/stdout
+	rm -f $tmp
+
