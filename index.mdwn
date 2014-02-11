@@ -170,6 +170,8 @@ Install `cwebp` like so:
 * Recreate it using hte same start sector
 * Resize it
 
+Using fdisk on Archlinux on my X220, with the SD card on the `/dev/mmcblk0` device:
+
 	x220:~$ sudo fdisk /dev/mmcblk0
 
 	Welcome to fdisk (util-linux 2.24.1).
@@ -272,7 +274,7 @@ Now lets write out this new partition that takes up the whole of this 8GB SD car
 	The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe(8) or kpartx(8).
 
 Ok, now you need to take out the SD card and re-insert or do whatever is
-neccessary to make sure you're system RE-READs the NEW PARTITION TABLE.
+necessary to make sure you're system RE-READs the NEW PARTITION TABLE.
 
 Ok, lets check to be sure after I've re-inserted it.
 
