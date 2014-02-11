@@ -162,3 +162,158 @@ Install `cwebp` like so:
 	>>> Updating module dependencies. Please wait ...
 	[root@pihsg pkg]#
 
+## Resizing a freshly dd-ed Archlinux image to take all the available space of the sd card
+
+
+1. Write the image
+* Delete the second partition
+* Recreate it using hte same start sector
+* Resize it
+
+	x220:~$ sudo fdisk /dev/mmcblk0
+
+	Welcome to fdisk (util-linux 2.24.1).
+	Changes will remain in memory only, until you decide to write them.
+	Be careful before using the write command.
+
+
+	Command (m for help): p
+	Disk /dev/mmcblk0: 7.4 GiB, 7969177600 bytes, 15564800 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disklabel type: dos
+	Disk identifier: 0x417ee54b
+
+	Device         Boot     Start       End  Blocks  Id System
+	/dev/mmcblk0p1           2048    186367   92160   c W95 FAT32 (LBA)
+	/dev/mmcblk0p2         186368   3667967 1740800   5 Extended
+	/dev/mmcblk0p5         188416   3667967 1739776  83 Linux
+
+The partition is a little complicated. The second partition is actually within
+an extended partition. Just follow what I do:
+
+	Command (m for help): d
+	Partition number (1,2,5, default 5): 2
+
+	Partition 2 has been deleted.
+
+I delete the partition, but actually the data is still there if I recreate on the same block boundaries:
+
+	Command (m for help): p
+	Disk /dev/mmcblk0: 7.4 GiB, 7969177600 bytes, 15564800 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disklabel type: dos
+	Disk identifier: 0x417ee54b
+
+	Device         Boot Start       End Blocks  Id System
+	/dev/mmcblk0p1       2048    186367  92160   c W95 FAT32 (LBA)
+
+	Command (m for help): n
+
+	Partition type:
+	   p   primary (1 primary, 0 extended, 3 free)
+	   e   extended
+	Select (default p): e
+	Partition number (2-4, default 2):
+	First sector (186368-15564799, default 186368): 186368
+	Last sector, +sectors or +size{K,M,G,T,P} (186368-15564799, default 15564799):
+
+	Created a new partition 2 of type 'Extended' and of size 7.3 GiB.
+
+	Command (m for help): p
+	Disk /dev/mmcblk0: 7.4 GiB, 7969177600 bytes, 15564800 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disklabel type: dos
+	Disk identifier: 0x417ee54b
+
+	Device         Boot     Start       End  Blocks  Id System
+	/dev/mmcblk0p1           2048    186367   92160   c W95 FAT32 (LBA)
+	/dev/mmcblk0p2         186368  15564799 7689216   5 Extended
+
+	Command (m for help): n
+
+	Partition type:
+	   p   primary (1 primary, 1 extended, 2 free)
+	   l   logical (numbered from 5)
+	Select (default p): l
+
+	Adding logical partition 5
+	First sector (188416-15564799, default 188416):
+	Last sector, +sectors or +size{K,M,G,T,P} (188416-15564799, default 15564799):
+
+	Created a new partition 5 of type 'Linux' and of size 7.3 GiB.
+
+	Command (m for help): p
+	Disk /dev/mmcblk0: 7.4 GiB, 7969177600 bytes, 15564800 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disklabel type: dos
+	Disk identifier: 0x417ee54b
+
+	Device         Boot     Start       End  Blocks  Id System
+	/dev/mmcblk0p1           2048    186367   92160   c W95 FAT32 (LBA)
+	/dev/mmcblk0p2         186368  15564799 7689216   5 Extended
+	/dev/mmcblk0p5         188416  15564799 7688192  83 Linux
+
+Now lets write out this new partition that takes up the whole of this 8GB SD card:
+
+	Command (m for help): w
+
+	The partition table has been altered.
+	Calling ioctl() to re-read partition table.
+	Re-reading the partition table failed.: Device or resource busy
+
+	The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe(8) or kpartx(8).
+
+Ok, now you need to take out the SD card and re-insert or do whatever is
+neccessary to make sure you're system RE-READs the NEW PARTITION TABLE.
+
+Ok, lets check to be sure after I've re-inserted it.
+
+	x220:~$ sudo fdisk /dev/mmcblk0
+
+	Welcome to fdisk (util-linux 2.24.1).
+	Changes will remain in memory only, until you decide to write them.
+	Be careful before using the write command.
+
+
+	Command (m for help): p
+	Disk /dev/mmcblk0: 7.4 GiB, 7969177600 bytes, 15564800 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disklabel type: dos
+	Disk identifier: 0x417ee54b
+
+	Device         Boot     Start       End  Blocks  Id System
+	/dev/mmcblk0p1           2048    186367   92160   c W95 FAT32 (LBA)
+	/dev/mmcblk0p2         186368  15564799 7689216   5 Extended
+	/dev/mmcblk0p5         188416  15564799 7688192  83 Linux
+
+	Command (m for help): q
+
+Looks good! Now we have to tell the ext filesystem on the disk, we have resized, like so:
+
+	x220:~$ sudo e2fsck -f /dev/mmcblk0p5
+	e2fsck 1.42.9 (28-Dec-2013)
+	/dev/mmcblk0p5: recovering journal
+	Pass 1: Checking inodes, blocks, and sizes
+	Pass 2: Checking directory structure
+	Pass 3: Checking directory connectivity
+	Pass 4: Checking reference counts
+	Pass 5: Checking group summary information
+	/dev/mmcblk0p5: 28178/108864 files (1.1% non-contiguous), 119199/434944 blocks
+	x220:~$ sudo resize2fs /dev/mmcblk0p5
+	resize2fs 1.42.9 (28-Dec-2013)
+	Resizing the filesystem on /dev/mmcblk0p5 to 1922048 (4k) blocks.
+	The filesystem on /dev/mmcblk0p5 is now 1922048 blocks long.
+
+
+Mount /dev/mmcblk0p5 and inspect the data. The Archlinux Arm filesystem should
+be there in tact. Unmount and you're ready to go!
