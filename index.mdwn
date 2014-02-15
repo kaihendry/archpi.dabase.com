@@ -91,6 +91,16 @@ You need to append to `/boot/config.txt`:
 
 And `reboot`...
 
+## Setting up correct time
+
+You need to have Internet connectivity for time to be properly synced since the
+PI does not have a clock.
+
+	pacman -S ntp
+	systemctl enable ntpd.service
+	timedatectl set-ntp 1
+	timedatectl status
+
 ## Sending and receiving PI Camera video over the network
 
 <a href="http://www.flickr.com/photos/hendry/9417983903/" title="2013-08-01 16.55.38 by Kai Hendry, on Flickr"><img src="http://farm8.staticflickr.com/7441/9417983903_0bd80c040c.jpg" width="500" height="375" alt="2013-08-01 16.55.38"></a>
