@@ -66,6 +66,10 @@ See <http://pi.dabase.com/> for such a service.
 
 Yes, `irc://irc.freenode.net/#archlinux-arm`
 
+## Is there an Archlinux ARM mailing list?
+
+No there isn't, however there is an [annoying phpBB forum](http://archlinuxarm.org/forum/viewforum.php?f=31) though.
+
 ## [PI Camera](http://www.raspberrypi.org/camera): Where is raspi{still,vid}?
 
 [Rpi userland](https://github.com/raspberrypi/userland) is packaged as raspberrypi-firmware-tools.
@@ -162,7 +166,7 @@ Install `cwebp` like so:
 	>>> Updating module dependencies. Please wait ...
 	[root@pihsg pkg]#
 
-## Resizing a freshly dd-ed Archlinux image to take all the available space of the sd card
+## Resizing a freshly dd-ed Archlinux image to take all the available space of the SD card
 
 
 1. Write the image
