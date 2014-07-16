@@ -316,20 +316,7 @@ Ok, lets check to be sure after I've re-inserted it.
 
 Looks good! Now we have to tell the ext filesystem on the disk, we have resized, like so:
 
-	x220:~$ sudo e2fsck -f /dev/mmcblk0p5
-	e2fsck 1.42.9 (28-Dec-2013)
-	/dev/mmcblk0p5: recovering journal
-	Pass 1: Checking inodes, blocks, and sizes
-	Pass 2: Checking directory structure
-	Pass 3: Checking directory connectivity
-	Pass 4: Checking reference counts
-	Pass 5: Checking group summary information
-	/dev/mmcblk0p5: 28178/108864 files (1.1% non-contiguous), 119199/434944 blocks
 	x220:~$ sudo resize2fs /dev/mmcblk0p5
-	resize2fs 1.42.9 (28-Dec-2013)
-	Resizing the filesystem on /dev/mmcblk0p5 to 1922048 (4k) blocks.
-	The filesystem on /dev/mmcblk0p5 is now 1922048 blocks long.
-
 
 Mount /dev/mmcblk0p5 and inspect the data. The Archlinux Arm filesystem should
 be there in tact. Unmount and you're ready to go!
