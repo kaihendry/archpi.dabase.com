@@ -288,7 +288,7 @@ Now lets write out this new partition that takes up the whole of this 8GB SD car
 	The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe(8) or kpartx(8).
 
 Ok, now you need to take out the SD card and re-insert or do whatever is
-necessary to make sure you're system RE-READs the NEW PARTITION TABLE.
+necessary to make sure your system RE-READs the NEW PARTITION TABLE.
 
 Ok, lets check to be sure after I've re-inserted it.
 
@@ -316,7 +316,22 @@ Ok, lets check to be sure after I've re-inserted it.
 
 Looks good! Now we have to tell the ext filesystem on the disk, we have resized, like so:
 
-	x220:~$ sudo resize2fs /dev/mmcblk0p5
+	x220:~$ sudo resize2fs  /dev/mmcblk0p5
+	resize2fs 1.42.10 (18-May-2014)
+	Please run 'e2fsck -f /dev/mmcblk0p5' first.
+
+	x220:~$ sudo e2fsck -f /dev/mmcblk0p5
+	e2fsck 1.42.10 (18-May-2014)
+	Pass 1: Checking inodes, blocks, and sizes
+	Pass 2: Checking directory structure
+	Pass 3: Checking directory connectivity
+	Pass 4: Checking reference counts
+	Pass 5: Checking group summary information
+	/dev/mmcblk0p5: 28769/108864 files (1.3% non-contiguous), 124064/434944 blocks
+	x220:~$ sudo resize2fs  /dev/mmcblk0p5
+	resize2fs 1.42.10 (18-May-2014)
+	Resizing the filesystem on /dev/mmcblk0p5 to 1922048 (4k) blocks.
+	The filesystem on /dev/mmcblk0p5 is now 1922048 blocks long.
 
 Mount /dev/mmcblk0p5 and inspect the data. The Archlinux Arm filesystem should
-be there in tact. Unmount and you're ready to go!
+be there intact. Unmount and you're ready to go!
