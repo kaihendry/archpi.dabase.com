@@ -181,7 +181,7 @@ Install `cwebp` like so:
 
 1. Write the image
 * Delete the second partition
-* Recreate it using hte same start sector
+* Recreate it using the same start sector
 * Resize it
 
 Using fdisk on Archlinux on my X220, with the SD card on the `/dev/mmcblk0` device:
@@ -316,18 +316,6 @@ Ok, lets check to be sure after I've re-inserted it.
 
 Looks good! Now we have to tell the ext filesystem on the disk, we have resized, like so:
 
-	x220:~$ sudo resize2fs  /dev/mmcblk0p5
-	resize2fs 1.42.10 (18-May-2014)
-	Please run 'e2fsck -f /dev/mmcblk0p5' first.
-
-	x220:~$ sudo e2fsck -f /dev/mmcblk0p5
-	e2fsck 1.42.10 (18-May-2014)
-	Pass 1: Checking inodes, blocks, and sizes
-	Pass 2: Checking directory structure
-	Pass 3: Checking directory connectivity
-	Pass 4: Checking reference counts
-	Pass 5: Checking group summary information
-	/dev/mmcblk0p5: 28769/108864 files (1.3% non-contiguous), 124064/434944 blocks
 	x220:~$ sudo resize2fs  /dev/mmcblk0p5
 	resize2fs 1.42.10 (18-May-2014)
 	Resizing the filesystem on /dev/mmcblk0p5 to 1922048 (4k) blocks.
