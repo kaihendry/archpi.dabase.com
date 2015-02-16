@@ -1,6 +1,6 @@
 <!-- Archlinux on Raspberry PI -->
 
-# Archlinux ARM on Raspberry PI (rpi)
+# Archlinux ARM (alarm) on Raspberry PI (rpi)
 
 <div id="tocwrapper"><!-- toc --></div>
 
@@ -14,9 +14,9 @@ source](https://github.com/kaihendry/archpi.dabase.com).
 
 ## Why Archlinux ARM ?
 
-* Cleaner
-* Systemd init by default
-* Easier to package and maintain
+* Rolling release, more upto date
+* Cleaner packaging
+* [Systemd](http://www.freedesktop.org/wiki/Software/systemd/) init by default
 
 ## Is there an official wiki?
 
@@ -31,6 +31,11 @@ After installing the latest [Archlinux ARM](http://archlinuxarm.org/) from [PI d
 ## To login
 
 User name `root` and password `root`.
+
+Note that you really should disable ssh logins with that default:
+
+	grep ^PasswordAuthentication /etc/ssh/sshd_config
+	PasswordAuthentication no
 
 ## To update
 
@@ -70,6 +75,58 @@ Yes, `irc://irc.freenode.net/#archlinux-arm`
 
 No there isn't, however there is an [annoying phpBB forum](http://archlinuxarm.org/forum/viewforum.php?f=31) though.
 
+## Wireless
+
+`wifi-menu/netctl` is **the old way** and I would encourage you not to use it, though [I am biased](http://dabase.com/blog/Good_riddance_netctl/).
+
+Sadly you need to `pacman -Syu wpa_supplicant` since it's not on the default
+install image. I do this by temporarily wiring my <abbr title="Raspberry Pi">rpi</abbr> via the ethernet port.
+
+`systemctl start wpa_supplicant@wlan0` will fail without a config as you can see from `systemctl status wpa_supplicant@wlan0` output.
+
+	echo "update_config=1" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+
+And hopefully `systemctl start wpa_supplicant@wlan0` will now work.
+
+`wpa_cli` to add a network. The UI is unfortunately pretty woeful. Something like:
+
+	add_network
+	set_network 0 ssid "MYSSID"
+	set_network 0 psk "passphrase"
+	enable_network 0
+	save_config
+
+Obviously check `/etc/wpa_supplicant/wpa_supplicant-wlan0.conf` is looking correct.
+
+See <https://wiki.archlinux.org/index.php/WPA_supplicant> for details. Once
+setup, `systemctl enable wpa_supplicant@wlan0` to make sure it associates with
+wireless on boot.
+
+Finally you need to setup `systemd-networkd` for DHCP functionality like so:
+
+	$cat /etc/systemd/network/any.network
+	[Match]
+	Name=*
+
+	[Network]
+	DHCP=both
+
+And of course, enable it.
+
+	systemctl enable systemd-networkd
+
+Reboot to see if you device comes up online correctly!
+
+## Working with <abbr title='General-purpose input/output'>GPIO</abbr> pins on a Rpi
+
+Install `pacman -Sy wiringpi` and
+
+	watch -n 0.5 gpio readall
+
+See this [video a friend made of my living room light](https://www.youtube.com/watch?v=wEfofWLITJM).
+
+Checkout the [systemd service file](http://ix.io/glH) that controls it.
+
 ## [PI Camera](http://www.raspberrypi.org/camera): Where is raspi{still,vid}?
 
 [Rpi userland](https://github.com/raspberrypi/userland) is packaged as raspberrypi-firmware-tools.
@@ -94,16 +151,6 @@ You need to append to `/boot/config.txt`:
 	fixup_file=fixup_x.dat
 
 And `reboot`...
-
-## Setting up correct time
-
-You need to have Internet connectivity for time to be properly synced since the
-PI does not have a clock.
-
-	pacman -S ntp
-	systemctl enable ntpd.service
-	timedatectl set-ntp 1
-	timedatectl status
 
 ## Sending and receiving PI Camera video over the network
 
