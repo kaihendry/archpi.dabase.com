@@ -1,10 +1,35 @@
 <!-- Archlinux on Raspberry PI -->
 
-# Archlinux ARM (alarm) on Raspberry PI (rpi)
+
+
+<div class="row">
+<div class="four columns">
+<img class="u-max-full-width" src="images/archlinux.svg" alt="Archlinux logo">
+</div>
+<div class="six columns">
+<h2>Archlinux on ARM</h2>
+<p>Aka <strong>alarm</strong> is the best Linux distribution. Why? It has simple packaging, an <a href="https://aur.archlinux.org/">AUR</a> for you to create your own packaging and the best systemd support.</p>
+<a class="button" href="http://archlinuxarm.org/" target="_blank">Archlinux ARM</a>
+</div>
+</div>
+
+<div class="row">
+<img class="one columns u-max-full-width" src="images/rpi.svg" alt="RaspberryPI logo">
+<img class="one columns u-max-full-width" src="images/rpi.svg" alt="RaspberryPI logo">
+<img class="one columns u-max-full-width" src="images/rpi.svg" alt="RaspberryPI logo">
+<img class="one columns u-max-full-width" src="images/rpi.svg" alt="RaspberryPI logo">
+<div class="six columns">
+<h1>Raspberry Pi2</h1>
+<p>Aka <strong>rpi2</strong> is an inexpensive and popular device platform.</p>
+<a class="button" href="http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2" target="_blank">Archlinux ARM on Rpi2</a>
+</div>
+</div>
 
 <div id="tocwrapper"><!-- toc --></div>
 
+
 ## What's this site???
+
 
 Have you had an Archlinux ARM question, typed it into Google and didn't find an answer?
 

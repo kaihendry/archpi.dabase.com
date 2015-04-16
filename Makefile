@@ -8,8 +8,9 @@ all: $(OUTFILES)
 	@cat header.inc > $@
 	@# First seen comment becomes page title
 	@sed -n  '/<!--/{s/<!-- *//;s/ *-->//;p;q; }' $< >> $@
-	@echo "</title></head><body>" >> $@
-	@markdown $< >> $@
+	@git describe --always >> $@
+	@echo "</title></head><body><div class=container>" >> $@
+	@cmark $< >> $@
 	@cat footer.inc >> $@
 	@mv $@ $(TEMP)
 	@anolis $(TEMP) $@
@@ -17,7 +18,7 @@ all: $(OUTFILES)
 	@rm -f $(TEMP)
 
 upload:
-	aws --profile hsgpower s3 cp --acl public-read index.html s3://archpi.dabase.com/index.html
+	aws --profile hsgpower s3 sync --delete --acl public-read . s3://archpi.dabase.com/
 
 clean:
 	rm -f $(OUTFILES)
