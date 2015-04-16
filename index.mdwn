@@ -1,4 +1,4 @@
-<!-- Archlinux on Raspberry PI -->
+<!-- Archlinux on Raspberry PI2 -->
 
 
 
@@ -20,8 +20,8 @@
 <img class="one columns u-max-full-width" src="images/rpi.svg" alt="RaspberryPI logo">
 <div class="six columns">
 <h1>Raspberry Pi2</h1>
-<p>Aka <strong>rpi2</strong> is an inexpensive and popular device platform.</p>
-<a class="button" href="http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2" target="_blank">Archlinux ARM on Rpi2</a>
+<p>Aka <strong>rpi2</strong> is an inexpensive and popular device platform for the <strong>armv7h</strong> ARM architecture.</p>
+<a class="button button-primary" href="http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2" target="_blank">Archlinux ARM on Rpi2</a>
 </div>
 </div>
 
@@ -88,7 +88,7 @@ Run `top`.
 
 See <http://pi.dabase.com/> for such a service.
 
-## Is there an Archlinux ARM IRC channel ?
+## Is there an Archlinux ARM IRC channel?
 
 Yes, `irc://irc.freenode.net/#archlinux-arm`
 
