@@ -16,5 +16,8 @@ all: $(OUTFILES)
 	@echo $< '→' $@
 	@rm -f $(TEMP)
 
+upload:
+	aws --profile hsgpower s3 cp --acl public-read index.html s3://archpi.dabase.com/index.html
+
 clean:
 	rm -f $(OUTFILES)
